@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>Escher-Voronoi</title>
+    <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+    <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+    <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+    <link rel=manifest href=/manifest.json>
+    <link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+    <meta name=apple-mobile-web-app-title content=Eschersketch>
+    <meta name=application-name content=Eschersketch>
+    <meta name=theme-color content=#ffffff>
+    <link rel=stylesheet type=text/css href="static/icomoon.css">
+    <script src=https://unpkg.com/@spreadtheweb/multi-range-slider@1.0.2/dist/range-slider.main.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.0.0/fabric.min.js></script><script src=https://threejs.org/examples/jsm/controls/OrbitControls.js></script>
+    <link href="static/css/app.7a17eab7e6e8f645b864856085a4ce06.css" rel=stylesheet>
+</head>
+<body>
+<div id=sketch-container>
+    <canvas id=sketchrender width=500 height=500 style=z-index:0></canvas>
+    <canvas id=sketchlive width=500 height=500 style=z-index:1></canvas>
+</div>
+<div id=sketch1>
+    <canvas id=sketchrender1 width=400 height=250 style=z-index:0></canvas>
+    <canvas id=sketchlive1 width=400 height=250 style=z-index:1></canvas>
+</div>
+<div id=sketch2>
+    <canvas id=sketchrender2 width=500 height=500 style=z-index:0></canvas>
+    <canvas id=sketchlive2 width=400 height=250 style=z-index:1></canvas>
+</div>
+<div id=sketch3>
+    <canvas id=sketchrender3 width=500 height=500 style=z-index:0></canvas>
+    <canvas id=sketchlive3 width=400 height=250 style=z-index:1></canvas>
+</div>
+<div id=sketch4>
+    <canvas id=sketchrender4 width=500 height=500 style=z-index:0></canvas>
+    <canvas id=sketchlive4 width=400 height=250 style=z-index:1></canvas>
+</div>
+<canvas id=hiddenCanvas1 style="display: none;"></canvas>
+<canvas id=hiddenCanvas2 style="display: none;"></canvas>
+<canvas id=hiddenCanvas3 style="display: none;"></canvas>
+<div id=layers3D-container></div>
+<svg width=202px height=202px viewBox="0 0 202 202" version=1.1 xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink>
+    <g transform="translate(0.000000,194.000000) scale(0.100000,-0.100000)" fill=#000000 stroke=none>
+        <path fill=none d="M526 1713 c-16 -3 -38 -13 -49 -24 -19 -18 -20 -24 -10 -82 18 -106
+               79 -231 150 -307 60 -64 89 -80 283 -156 164 -64 232 -104 303 -178 59 -61
+               167 -194 167 -205 0 -5 18 -28 40 -51 l40 -43 88 7 c86 7 87 7 138 -26 29 -18
+               80 -60 115 -92 118 -111 190 -138 294 -112 60 15 154 72 273 164 68 53 91 79
+               92 101 0 27 -113 183 -198 273 -122 128 -188 167 -432 258 -137 52 -155 64
+               -213 142 -29 41 -86 181 -101 251 -4 15 -15 36 -26 47 -27 27 -61 18 -120 -30
+               -62 -50 -137 -102 -196 -135 -41 -24 -60 -29 -124 -29 -84 -1 -71 -8 -207 115
+               -125 113 -175 131 -307 112z m185 -49 c30 -20 83 -65 119 -99 71 -70 129 -104
+               187 -112 54 -7 140 21 209 67 32 22 75 51 94 64 19 13 41 31 49 40 7 8 29 25
+               47 37 28 17 37 19 49 9 8 -7 15 -22 15 -33 0 -22 17 -81 31 -109 5 -10 9 -23
+               9 -29 0 -18 58 -128 88 -165 38 -48 89 -80 174 -109 215 -72 316 -127 416
+               -225 74 -73 232 -275 232 -297 0 -7 -12 -19 -27 -27 -16 -8 -37 -23 -48 -33
+               -117 -107 -255 -183 -331 -183 -70 1 -117 26 -218 119 -140 128 -162 137 -302
+               116 l-51 -7 -39 58 c-141 215 -263 326 -435 397 -24 11 -57 25 -74 32 -16 7
+               -60 22 -97 34 -92 30 -151 73 -203 145 -40 57 -105 196 -105 227 0 7 -5 27
+               -12 45 -20 55 0 66 133 72 27 2 50 -7 90 -34z"/>
+    </g>
+</svg>
+<div id=slider-container>
+    <div id=slider>
+        <div class=thumb data-index=0 style="background-color: hsl(0, 70%, 70%);" data-value=0%></div>
+        <div class=thumb data-index=1 style="background-color: hsl(60, 70%, 70%);" data-value=33%></div>
+        <div class=thumb data-index=2 style="background-color: hsl(120, 70%, 70%);" data-value=66%></div>
+        <div class=thumb data-index=3 style="background-color: hsl(180, 70%, 70%);" data-value=100%></div>
+    </div>
+    <div class=tooltip></div>
+</div>
+<div id=single-slider-container>
+    <div class=thumb data-value=0%></div>
+    <div class=tooltip></div>
+</div>
+<div id=topUI></div>
+<script type=text/javascript src="static/js/manifest.250a842d277590fa8323.js"></script><script type=text/javascript src="static/js/vendor.69ff8477f8ec34fe2c39.js"></script><script type=text/javascript src="static/js/app.22fbee2c381fc2b1ed13.js"></script>
+</body>
+</html>
